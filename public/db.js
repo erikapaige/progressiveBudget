@@ -34,7 +34,7 @@ request.onerror = event => {
 
 // if post fails (in .catch statement index.js #49) want to post to indexdb
 const saveRecord = record => {
-  const record = db.transaction(['pending'], 'readwrite')
+  const transaction = db.transaction(['pending'], 'readwrite')
   const store = transaction.objectStore('pending')
 
   store.add(record)
@@ -47,11 +47,11 @@ const checkDatabase = () => {
 
   getAll.onsuccess = () => {
     if (getAll.result.length > 0) {
-      axios.post('/api/transaction', getAll.result)
+      axios.post('/api/transaction/bulk', getAll.result)
         .then(() => {
-          // delete records if successful 
           const transaction = db.transaction(['pending'], 'readwrite')
           const store = transaction.objectStore('pending')
+          // delete records if successful 
           store.clear()
         })
     }
