@@ -2,7 +2,7 @@
 let db
 
 // global indexDB variable
-const request = indexedDB.open('list', 1)
+const request = indexedDB.open('budget', 1)
 
 // used to update db when changes are made
 request.onupgradeneeded = event => {
@@ -36,7 +36,8 @@ request.onerror = event => {
 const saveRecord = transaction => {
   const transaction = db.transaction(['pending'], 'readwrite')
   const store = transaction.objectStore('pending')
-  store.add(transaction)
+
+  store.add(record)
 }
 
 const checkDatabase = () => {
@@ -46,8 +47,9 @@ const checkDatabase = () => {
 
   getAll.onsuccess = () => {
     if (getAll.result.length > 0) {
-      axios.post('/api/items', getAll.result)
+      axios.post('/api/transaction', getAll.result)
         .then(() => {
+          // delete records if successful 
           const transaction = db.transaction(['pending'], 'readwrite')
           const store = transaction.objectStore('pending')
           store.clear()
@@ -55,6 +57,7 @@ const checkDatabase = () => {
     }
   }
 }
+
 
 window.addEventListener('online', checkDatabase)
 
