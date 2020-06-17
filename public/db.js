@@ -49,9 +49,9 @@ const checkDatabase = () => {
     if (getAll.result.length > 0) {
       axios.post('/api/transaction/bulk', getAll.result)
         .then(() => {
+          // remove records if successful
           const transaction = db.transaction(['pending'], 'readwrite')
           const store = transaction.objectStore('pending')
-          // delete records if successful 
           store.clear()
         })
     }
