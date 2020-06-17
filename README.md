@@ -28,7 +28,7 @@ If the dependencies listed above did not appear in your package.json file after 
 The 'Budget Tracker' allows users to add expenses and deposits. The application is available to users with or without data/internet connection. This functionality enables users to track their expenses and receive their most up to date balance regardless of connection.
 
 ## Links
-The full application can be viewed on this heroku link: 
+The full application can be viewed on this heroku link: https://nameless-mesa-29263.herokuapp.com/
 <br>
 <br>
 <br>
