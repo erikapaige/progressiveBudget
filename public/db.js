@@ -32,9 +32,9 @@ request.onerror = event => {
 }
 
 
-// if post fails (in .catch statement index.db #49) want to post to indexdb
-const saveRecord = transaction => {
-  const transaction = db.transaction(['pending'], 'readwrite')
+// if post fails (in .catch statement index.js #49) want to post to indexdb
+const saveRecord = record => {
+  const record = db.transaction(['pending'], 'readwrite')
   const store = transaction.objectStore('pending')
 
   store.add(record)
